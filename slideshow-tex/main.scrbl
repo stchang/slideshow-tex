@@ -47,4 +47,6 @@ Example:
 
 @image{img/example1.png}
 
+@defproc[(define-preamble pa) void?]{Adds a custom preamble. Use this to import any extra latex package. Each call overwrites the previously defined preamble.}
+
 @defproc[(tex-remove-all-cached-files) boolean?]{Removes all cached files in @tt{<tmpdir>/slideshow-texfiles/} where @tt{<tmpdir>} is equal to @tt{(@racket[find-system-path] 'temp-dir)}.}

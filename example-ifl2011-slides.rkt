@@ -4,7 +4,7 @@
 (require (for-syntax racket/list)) ; take and drop
 
 #;(require (planet stchang/slideshow-tex))
-(require "main.rkt")
+(require "slideshow-tex/main.rkt")
 
 (define MAIN-FONT-FACE "CMU Sans Serif")
 (define TT-FONT-FACE "CMU Typewriter Text")
