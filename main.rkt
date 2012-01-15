@@ -3,7 +3,7 @@
 (require racket/system)
 (require slideshow)
 
-(provide (rename-out [tex-math tex]) tex-remove-all-cached-files)
+(provide (rename-out [tex-math tex]) tex-remove-all-cached-files define-preamble)
 
 (define tex-dir (string-append (path->string (find-system-path 'temp-dir)) 
                                "/slideshow-texfiles/"))
@@ -23,6 +23,22 @@
 (define (tex-math . strs)
   (tex (string-append "$" (apply string-append strs) "$")))
                   
+
+; required preamble
+(define preamble "\\usepackage[pass]{geometry}\n")
+
+; customizable preamble (default value is for backwards compatibility)
+(define custom-preamble
+  (string-append
+   "\\usepackage{color}\n"
+   "\\definecolor{grayed}{gray}{0.4}\n"
+   "\\definecolor{lightgrayed}{gray}{0.8}\n"
+   "\\definecolor{black}{gray}{0}\n"
+   "\\definecolor{white}{gray}{1}\n"))
+   
+; sets the customizable preamble
+(define (define-preamble pa) (set! custom-preamble pa))
+
 (define (tex . strs)
   (define str (apply string-append strs))
   (define-values (fileroot texfile pdffile pngfile) (get-filenames str))
@@ -35,12 +51,8 @@
         (let ([o (open-output-file texfile #:mode 'binary #:exists 'replace)])
           (display (string-append
                     "\\documentclass{article}\n"
-                    "\\usepackage[pass]{geometry}\n"
-                    "\\usepackage{color}\n"
-                    "\\definecolor{grayed}{gray}{0.4}\n"
-                    "\\definecolor{lightgrayed}{gray}{0.8}\n"
-                    "\\definecolor{black}{gray}{0}\n"
-                    "\\definecolor{white}{gray}{1}\n"
+                    preamble
+                    custom-preamble
                     "\\begin{document}\n"
                     "\\newbox\\mycontent\\savebox\\mycontent{" str "}\n"
                     "\\pdfpageheight=\\dimexpr\\dp\\mycontent+\\ht\\mycontent+6pt\n"

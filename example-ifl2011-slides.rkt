@@ -3,7 +3,8 @@
 (require scheme/gui) ; for font% class
 (require (for-syntax racket/list)) ; take and drop
 
-(require (planet stchang/slideshow-tex))
+#;(require (planet stchang/slideshow-tex))
+(require "main.rkt")
 
 (define MAIN-FONT-FACE "CMU Sans Serif")
 (define TT-FONT-FACE "CMU Typewriter Text")
@@ -190,6 +191,15 @@
         #'(list stages-ready ...)))))
 
 (current-para-width 900)
+
+(define-preamble
+  (string-append
+   "\\usepackage{color}\n"
+   "\\definecolor{grayed}{gray}{0.4}\n"
+   "\\definecolor{lightgrayed}{gray}{0.8}\n"
+   "\\definecolor{black}{gray}{0}\n"
+   "\\definecolor{white}{gray}{1}\n"
+   ))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
