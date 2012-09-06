@@ -6,6 +6,7 @@
 #;(require (planet stchang/slideshow-tex))
 (require "slideshow-tex/main.rkt")
 
+
 (define MAIN-FONT-FACE "CMU Sans Serif")
 (define TT-FONT-FACE "CMU Typewriter Text")
 
@@ -194,6 +195,7 @@
 
 (define-preamble
   (string-append
+   "\\usepackage{mysty}\n"
    "\\usepackage{color}\n"
    "\\definecolor{grayed}{gray}{0.4}\n"
    "\\definecolor{lightgrayed}{gray}{0.8}\n"
@@ -208,7 +210,8 @@
 ;; ----------------------------------------------------------------------------
 
 (slide
- (comment "blank -- testing"))
+ (comment "blank -- testing")
+ @tex{\newlam})
 
 (slide
  (comment "")

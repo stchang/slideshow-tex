@@ -43,11 +43,16 @@
   (define str (apply string-append strs))
   (define-values (fileroot texfile pdffile pngfile) (get-filenames str))
   (define saved-cwd (current-directory))
+  (define saved-texinputs (getenv "TEXINPUTS"))
   (if (file-exists? (string-append tex-dir pngfile))
       (bitmap (string-append tex-dir pngfile))
       (begin
         (unless (directory-exists? tex-dir) (make-directory tex-dir))
         (current-directory tex-dir)
+        (if saved-texinputs
+            (putenv "TEXINPUTS" (string-append (path->string saved-cwd) ":"
+                                               saved-texinputs))
+            (putenv "TEXINPUTS" (path->string saved-cwd)))
         (let ([o (open-output-file texfile #:mode 'binary #:exists 'replace)])
           (display (string-append
                     "\\documentclass{article}\n"
@@ -71,7 +76,11 @@
                             (string-append fileroot ".log")
                             pdffile
                             texfile))
-            (current-directory saved-cwd))))))
+            (current-directory saved-cwd)
+            (if saved-texinputs
+                (putenv "TEXINPUTS" saved-texinputs)
+                (putenv "TEXINPUTS" ""))
+            )))))
 
 (define (tex-remove-all-cached-files)
   (system (string-append "rm -Rf " tex-dir)))

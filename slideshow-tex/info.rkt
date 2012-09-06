@@ -9,4 +9,4 @@
   (list '(div "Package to use LaTex code in Slideshow.")))
 (define release-notes 
   (list
-   '(div "Initial release.")))
+   '(div "Fix define-preamble to work with custom .sty files.")))

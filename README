@@ -1,0 +1,6 @@
+documentation:
+http://planet.racket-lang.org/package-source/stchang/slideshow-tex.plt/1/6/planet-docs/main/index.html 
+
+to package for planet:
+1) edit 'release-notes in info.rkt
+2) raco planet create slideshow-tex/
