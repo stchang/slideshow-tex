@@ -3,8 +3,8 @@
 (require scheme/gui) ; for font% class
 (require (for-syntax racket/list)) ; take and drop
 
-#;(require (planet stchang/slideshow-tex))
-(require "slideshow-tex/main.rkt")
+(require (planet stchang/slideshow-tex))
+#;(require "slideshow-tex/main.rkt")
 
 
 (define MAIN-FONT-FACE "CMU Sans Serif")

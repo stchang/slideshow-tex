@@ -1,9 +1,13 @@
-documentation:
+Documentation:
 http://planet.racket-lang.org/package-source/stchang/slideshow-tex.plt/1/6/planet-docs/main/index.html 
 
-to package for planet:
+To package for planet:
 1) edit 'release-notes in info.rkt
 2) delete tmp files in slideshow-tex/
    ie rm slideshow-tex/*~
       rm -Rf slideshow-tex/compiled/
 3) raco planet create slideshow-tex/
+
+Troubleshooting tips:
+- clear cached riles
+- reset $TEXINPUTS
